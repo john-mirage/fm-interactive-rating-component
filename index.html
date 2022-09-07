@@ -51,7 +51,7 @@
         <web-rating-checkbox value="4"></web-rating-checkbox>
         <web-rating-checkbox value="5"></web-rating-checkbox>
       </div>
-      <button class="web-rating-form__button" type="button">
+      <button class="web-rating-form__button" id="wrf-button" type="button">
         <span class="web-rating-form__button-label">submit</span>
       </button>
     </form>
@@ -66,7 +66,7 @@
   <!-- template | web rating result -->
   <template id="template-web-rating-result">
     <img class="web-rating-result__image" src="/src/images/illustration-thank-you.svg" alt="thank you illustration">
-    <p class="web-rating-result__value">You selected <span>1</span> out of 5</p>
+    <p class="web-rating-result__value">You selected <span id="wrr-value"></span> out of 5</p>
     <h2 class="web-rating-result__title">Thank you!</h2>
     <p class="web-rating-result__subtitle">We appreciate you taking the time to give a rating. If you ever need more support, don't hesitate to get in touch!</p>
   </template>

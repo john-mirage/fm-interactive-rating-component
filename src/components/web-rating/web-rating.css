@@ -2,7 +2,7 @@
   display: block;
   width: 100%;
   max-width: 412px;
-  height: auto;
+  min-height: 360px;
   background: linear-gradient(to top right, var(--color-background-from), var(--color-background-to));
   border-radius: 1rem;
 }

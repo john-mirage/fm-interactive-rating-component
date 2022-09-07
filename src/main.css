@@ -4,6 +4,7 @@
 @import "components/web-rating/web-rating.css";
 @import "components/web-rating-form/web-rating-form.css";
 @import "components/web-rating-checkbox/web-rating-checkbox.css";
+@import "components/web-rating-result/web-rating-result.css";
 
 :root {
   --color-orange: hsl(25, 97%, 53%);
