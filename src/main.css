@@ -1,0 +1,34 @@
+@import "styles/reset.css";
+@import "styles/page.css";
+
+@import "components/web-rating/web-rating.css";
+@import "components/web-rating-form/web-rating-form.css";
+@import "components/web-rating-checkbox/web-rating-checkbox.css";
+
+:root {
+  --color-orange: hsl(25, 97%, 53%);
+  --color-white: hsl(0, 0%, 100%);
+  --color-light-grey: hsl(217, 12%, 63%);
+  --color-medium-grey: hsl(216, 12%, 54%);
+  --color-dark-blue: hsl(213, 19%, 18%);
+  --color-button: hsl(210, 19%, 18%);
+  --color-background-from: hsl(215, 27%, 12%);
+  --color-background-to: hsl(215, 22%, 15%);
+  --color-very-dark-blue: hsl(216, 12%, 8%);
+  --color-transparent: transparent;
+}
+
+body {
+  font-family:
+    'Overpass',
+		system-ui,
+		-apple-system,
+		'Segoe UI',
+		Roboto,
+		Helvetica,
+		Arial,
+		sans-serif,
+		'Apple Color Emoji',
+		'Segoe UI Emoji';
+  background-color: var(--color-very-dark-blue);
+}
