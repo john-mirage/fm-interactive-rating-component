@@ -4,9 +4,9 @@
   text-align: center;
 }
 
-.web-rating-result__image {
-  margin-left: auto;
-  margin-right: auto;
+.web-rating-result__icon {
+  display: inline-block;
+  margin-top: 1rem;
   margin-bottom: 1.5rem;
 }
 
