@@ -3,6 +3,7 @@ class WebRatingResult extends HTMLElement {
   #initialMount = true;
   templateFragment: DocumentFragment;
   valueElement: HTMLSpanElement;
+  buttonElement: HTMLButtonElement;
   
   static get observedAttributes() {
     return ["value"];
@@ -13,6 +14,8 @@ class WebRatingResult extends HTMLElement {
     const template = <HTMLTemplateElement>document.getElementById("template-web-rating-result");
     this.templateFragment = <DocumentFragment>template.content.cloneNode(true);
     this.valueElement = <HTMLSpanElement>this.templateFragment.querySelector("#wrr-value");
+    this.buttonElement = <HTMLButtonElement>this.templateFragment.querySelector("#wrr-button");
+    this.handleButtonClick = this.handleButtonClick.bind(this);
   }
 
   get value(): string | null {
@@ -35,6 +38,11 @@ class WebRatingResult extends HTMLElement {
       this.#initialMount = false;
     }
     this.upgradeProperty("value");
+    this.buttonElement.addEventListener("click", this.handleButtonClick);
+  }
+
+  disconnectedCallback() {
+    this.buttonElement.removeEventListener("click", this.handleButtonClick);
   }
   
   upgradeProperty(prop: string) {
@@ -53,6 +61,13 @@ class WebRatingResult extends HTMLElement {
       default:
         throw new Error("The modified attribute is not observed");
     }
+  }
+
+  handleButtonClick() {
+    const customEvent = new CustomEvent("display-rating-form-view", {
+      bubbles: true
+    });
+    this.dispatchEvent(customEvent);
   }
 }
 

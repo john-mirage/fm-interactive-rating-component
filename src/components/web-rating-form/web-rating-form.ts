@@ -72,7 +72,7 @@ class WebRatingForm extends HTMLElement {
   }
 
   handleFormSubmit() {
-    const customEvent = new CustomEvent("update-rating-view", {
+    const customEvent = new CustomEvent("display-rating-result-view", {
       bubbles: true,
       detail: { value: this.value }
     });
