@@ -38,6 +38,7 @@
 .web-rating-form__button {
   width: 100%;
   height: 2.875rem;
+  padding: 0;
   background-color: var(--color-orange);
   border-radius: 9999px;
   border: none;
@@ -46,4 +47,9 @@
   letter-spacing: 0.125rem;
   text-transform: uppercase;
   color: var(--color-white);
+}
+
+.web-rating-form__button:disabled {
+  background-color: var(--color-button);
+  color: var(--color-medium-grey);
 }

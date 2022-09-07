@@ -14,6 +14,7 @@ class WebRating extends HTMLElement {
     super();
     this.webRatingForm = <WebRatingForm>document.createElement("web-rating-form");
     this.webRatingResult = <WebRatingResult>document.createElement("web-rating-result");
+    this.handleRatingView = this.handleRatingView.bind(this);
   }
 
   get currentView(): string | null {
@@ -37,6 +38,11 @@ class WebRating extends HTMLElement {
     if (this.currentView === null) {
       this.currentView = "form";
     }
+    this.addEventListener("update-rating-view", this.handleRatingView);
+  }
+
+  disconnectedCallback() {
+    this.removeEventListener("update-rating-view", this.handleRatingView);
   }
 
   attributeChangedCallback(name: string, _oldValue: string | null, newValue: string | null) {
@@ -65,6 +71,12 @@ class WebRating extends HTMLElement {
       default:
         throw new Error("The new current view is not valid");
     }
+  }
+
+  handleRatingView(customEvent: Event) {
+    const { value } = (<CustomEvent>customEvent).detail;
+    this.webRatingResult.value = value;
+    this.currentView = "result";
   }
 }
 

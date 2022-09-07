@@ -14,6 +14,7 @@ class WebRatingCheckbox extends HTMLElement {
     this.templateFragment = <DocumentFragment>template.content.cloneNode(true);
     this.inputElement = <HTMLInputElement>this.templateFragment.querySelector("#wrc-input");
     this.labelElement = <HTMLLabelElement>this.templateFragment.querySelector("#wrc-label");
+    this.handleInputChange = this.handleInputChange.bind(this);
   }
 
   get value(): string | null {
@@ -37,6 +38,11 @@ class WebRatingCheckbox extends HTMLElement {
     }
     this.inputElement.setAttribute("id", `wrc-input-${this.value}`);
     this.labelElement.setAttribute("for", `wrc-input-${this.value}`);
+    this.inputElement.addEventListener("change", this.handleInputChange);
+  }
+
+  disconnectedCallback() {
+    this.inputElement.removeEventListener("change", this.handleInputChange);
   }
 
   attributeChangedCallback(name: string, _oldValue: string | null, newValue: string | null) {
@@ -47,6 +53,14 @@ class WebRatingCheckbox extends HTMLElement {
       default:
         throw new Error("The modified attribute is not observed");
     }
+  }
+
+  handleInputChange() {
+    const customEvent = new CustomEvent("update-current-rating", {
+      bubbles: true,
+      detail: { value: this.value }
+    });
+    this.dispatchEvent(customEvent);
   }
 }
 
