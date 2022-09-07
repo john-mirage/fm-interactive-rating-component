@@ -1,27 +1,11 @@
-import "./assets/styles/index.css";
+import "./main.css";
 
-const ratingSubmitInput = document.getElementById("rating-submit") as HTMLInputElement;
-const ratingInputs = document.getElementsByClassName("rating-inputs") as HTMLCollectionOf<HTMLInputElement>;
+import WebRating from "@components/web-rating/web-rating";
+import WebRatingForm from "@components/web-rating-form/web-rating-form";
+import WebRatingCheckbox from "@components/web-rating-checkbox/web-rating-checkbox";
+import WebRatingResult from "@components/web-rating-result/web-rating-result";
 
-let inputsAreDisabled = false;
-
-function disableInputs() {
-    if (!inputsAreDisabled) {
-        for (let index = 0; index < ratingInputs.length; index++) {
-            ratingInputs[index].disabled = true;
-        }
-        ratingSubmitInput.disabled = true;
-        inputsAreDisabled = true;
-    }
-}
-
-ratingSubmitInput?.addEventListener("keyup", (event: KeyboardEvent) => {
-    event.preventDefault();
-    if (event.code === "Enter") {
-        const input = event.target as HTMLInputElement;
-        input.checked = true;
-        disableInputs();
-    }
-});
-
-ratingSubmitInput?.addEventListener("change", disableInputs);
+customElements.define("web-rating", WebRating);
+customElements.define("web-rating-form", WebRatingForm);
+customElements.define("web-rating-checkbox", WebRatingCheckbox);
+customElements.define("web-rating-result", WebRatingResult);

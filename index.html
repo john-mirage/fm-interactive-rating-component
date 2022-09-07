@@ -2,95 +2,77 @@
 <html lang="en" dir="ltr">
 
 <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/png" href="src/assets/images/favicon.png" />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Overpass:wght@400;700&display=swap" rel="stylesheet">
-    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-    <meta name="description" content="Frontend Mentor challenge solution for Interactive Rating Component">
-    <title>Frontend Mentor | Interactive Rating Component</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <link rel="icon" type="image/png" href="src/images/favicon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Overpass:wght@400;700&display=swap" rel="stylesheet">
+  
+  <!-- Primary Meta Tags -->
+  <title>Interactive rating component</title>
+  <meta name="title" content="Interactive rating component">
+  <meta name="description" content="Frontend mentor challenge solution for: Interactive rating component">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://john-mirage.github.io/interactive-rating-component/">
+  <meta property="og:title" content="Interactive rating component">
+  <meta property="og:description" content="Frontend mentor challenge solution for: Interactive rating component">
+  <meta property="og:image" content="https://john-mirage.github.io/interactive-rating-component/preview.jpg">
+
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="https://john-mirage.github.io/interactive-rating-component/">
+  <meta property="twitter:title" content="Interactive rating component">
+  <meta property="twitter:description" content="Frontend mentor challenge solution for: Interactive rating component">
+  <meta property="twitter:image" content="https://john-mirage.github.io/interactive-rating-component/preview.jpg">
 </head>
 
-<body class="flex flex-row justify-center items-center w-full min-h-screen px-6 py-10 bg-very-dark-blue">
+<body>
+  <!-- page -->
+  <main class="page">
+    <h1 class="page__title">Interactive rating component</h1>
+    <web-rating></web-rating>
+  </main>
 
-    <main>
-        <form method="post" class="max-w-card h-auto bg-transparent perspective" autocomplete="off">
+  <!-- template | web rating form -->
+  <template id="template-web-rating-form">
+    <form class="web-rating-form__container">
+      <svg class="web-rating-form__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 17 16" fill="currentColor">
+        <path d="m9.067.43 1.99 4.031c.112.228.33.386.58.422l4.45.647a.772.772 0 0 1 .427 1.316l-3.22 3.138a.773.773 0 0 0-.222.683l.76 4.431a.772.772 0 0 1-1.12.813l-3.98-2.092a.773.773 0 0 0-.718 0l-3.98 2.092a.772.772 0 0 1-1.119-.813l.76-4.431a.77.77 0 0 0-.222-.683L.233 6.846A.772.772 0 0 1 .661 5.53l4.449-.647a.772.772 0 0 0 .58-.422L7.68.43a.774.774 0 0 1 1.387 0Z"/>
+      </svg>
+      <h1 class="web-rating-form__title">How did we do ?</h1>
+      <p class="web-rating-form__subtitle">Please let us know how we did with your support request. All feedback is appreciated to help us improve our offering!</p>
+      <div class="web-rating-form__inputs">
+        <web-rating-checkbox value="1"></web-rating-checkbox>
+        <web-rating-checkbox value="2"></web-rating-checkbox>
+        <web-rating-checkbox value="3"></web-rating-checkbox>
+        <web-rating-checkbox value="4"></web-rating-checkbox>
+        <web-rating-checkbox value="5"></web-rating-checkbox>
+      </div>
+      <button class="web-rating-form__button" type="button">
+        <span class="web-rating-form__button-label">submit</span>
+      </button>
+    </form>
+  </template>
 
-            <!-- Rating options -->
-            <input class="rating-inputs visually-hidden" type="radio" name="rating-option" id="rating-input-1" value="1">
-            <input class="rating-inputs visually-hidden" type="radio" name="rating-option" id="rating-input-2" value="2">
-            <input class="rating-inputs visually-hidden" type="radio" name="rating-option" id="rating-input-3" value="3">
-            <input class="rating-inputs visually-hidden" type="radio" name="rating-option" id="rating-input-4" value="4">
-            <input class="rating-inputs visually-hidden" type="radio" name="rating-option" id="rating-input-5" value="5">
-    
-            <!-- Rating pannel flip trigger -->
-            <input class="visually-hidden" type="checkbox" name="rating-submit" id="rating-submit">
-    
-            <!-- Rating pannel -->
-            <div class="relative w-full h-auto preserve will-change-transform transition-transform duration-500" id="rating-pannel">
-    
-                <!-- Rating selection -->
-                <div class="relative z-30 w-full h-auto hidden-backface px-6 py-8 sm:px-9 sm:py-8 rounded-2xl sm:rounded-4xl bg-gradient-to-tr from-background-from to-background-to" id="rating-pannel-front">
-                    <div class="flex w-10 h-10 sm:w-12 sm:h-12 mb-6 sm:mb-9 rounded-full bg-button shadow-sm">
-                        <img class="w-3.5 h-3.5 sm:w-star sm:h-star m-auto" src="src/assets/images/icon-star.svg" alt="star icon">
-                    </div>
-                    <h1 class="text-3xl font-bold text-white mb-4">How did we do ?</h1>
-                    <p class="text-base font-normal text-light-grey leading-6 mb-8">Please let us know how we did with your support request. All feedback is appreciated to help us improve our offering!</p>
-                    
-                    <div class="flex flex-row flex-wrap w-ratings -mx-2 mb-2 sm:mb-4 ratings:justify-between ratings:w-full ratings:mx-0" id="rating-labels">
-                        <label class="rating-label mx-2 mb-4 flex w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-button cursor-pointer transition-colors ratings:mx-0" for="rating-input-1" id="rating-label-1">
-                            <span class="rating-label-text m-auto text-base font-bold text-light-grey transition-colors">1</span>
-                        </label>
-                        <label class="rating-label mx-2 mb-4 flex w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-button cursor-pointer transition-colors ratings:mx-0" for="rating-input-2" id="rating-label-2">
-                            <span class="rating-label-text m-auto text-base font-bold text-light-grey transition-colors">2</span>
-                        </label>
-                        <label class="rating-label mx-2 mb-4 flex w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-button cursor-pointer transition-colors ratings:mx-0" for="rating-input-3" id="rating-label-3">
-                            <span class="rating-label-text m-auto text-base font-bold text-light-grey transition-colors">3</span>
-                        </label>
-                        <label class="rating-label mx-2 mb-4 flex w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-button cursor-pointer transition-colors ratings:mx-0" for="rating-input-4" id="rating-label-4">
-                            <span class="rating-label-text m-auto text-base font-bold text-light-grey transition-colors">4</span>
-                        </label>
-                        <label class="rating-label mx-2 mb-4 flex w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-button cursor-pointer transition-colors ratings:mx-0" for="rating-input-5" id="rating-label-5">
-                            <span class="rating-label-text m-auto text-base font-bold text-light-grey transition-colors">5</span>
-                        </label>
-                    </div>
-    
-                    <!-- Submit button -->
-                    <label class="hidden w-full h-auto px-4 py-3 rounded-full transition-colors bg-orange cursor-pointer hover:bg-white group" for="rating-submit" id="rating-submit-button">
-                        <span class="block text-center text-sm font-bold tracking-button transition-colors text-white uppercase group-hover:text-orange">submit</span>
-                    </label>
-    
-                    <!-- Disabled button -->
-                    <div class="w-full h-auto px-4 py-3 rounded-full bg-button cursor-not-allowed" id="rating-submit-button-disabled">
-                        <span class="block text-center text-sm font-bold tracking-button text-white uppercase">submit</span>
-                    </div>
-                </div>
-    
-                <!-- Rating result -->
-                <div class="absolute z-40 top-0 left-0 w-full h-full hidden-backface px-6 py-8 sm:px-9 flex flex-col justify-start items-center rounded-2xl sm:rounded-4xl bg-gradient-to-tr from-background-from to-background-to rotate-y" id="rating-pannel-back">
-                    <img class="mb-6 sm:mb-8" src="src/assets/images/illustration-thank-you.svg" alt="thank you illustration">
-                    <span class="px-4 py-2 mb-6 sm:mb-8 rounded-full text-center text-base font-normal text-orange bg-button" id="rating-results">
-                        You selected 
-                        <span class="hidden" id="rating-result-1">1</span>
-                        <span class="hidden" id="rating-result-2">2</span>
-                        <span class="hidden" id="rating-result-3">3</span>
-                        <span class="hidden" id="rating-result-4">4</span>
-                        <span class="hidden" id="rating-result-5">5</span>
-                         out of 5
-                    </span>
-                    <h2 class="text-center text-3xl font-bold text-white mb-4">Thank you!</h2>
-                    <p class="text-center text-base font-normal text-light-grey leading-6">We appreciate you taking the time to give a rating. If you ever need more support, don't hesitate to get in touch!</p>
-                </div>
-    
-            </div>
-    
-        </form>
-    </main>
+  <!-- template | web rating checkbox -->
+  <template id="template-web-rating-checkbox">
+    <input class="web-rating-checkbox__input" id="wrc-input" name="rating-choice" type="radio"/>
+    <label class="web-rating-checkbox__label" id="wrc-label"></label>
+  </template>
 
-    
+  <!-- template | web rating result -->
+  <template id="template-web-rating-result">
+    <img class="web-rating-result__image" src="/src/images/illustration-thank-you.svg" alt="thank you illustration">
+    <p class="web-rating-result__value">You selected <span>1</span> out of 5</p>
+    <h2 class="web-rating-result__title">Thank you!</h2>
+    <p class="web-rating-result__subtitle">We appreciate you taking the time to give a rating. If you ever need more support, don't hesitate to get in touch!</p>
+  </template>
 
-    <script type="module" src="/src/main.ts"></script>
+  <!-- module -->
+  <script type="module" src="/src/main.ts"></script>
 </body>
 
 </html>
