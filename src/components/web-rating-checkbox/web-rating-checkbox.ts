@@ -38,6 +38,7 @@ class WebRatingCheckbox extends HTMLElement {
       this.#initialMount = false;
     }
     this.inputElement.setAttribute("id", `wrc-input-${this.value}`);
+    this.labelElement.setAttribute("id", `wrc-label-${this.value}`);
     this.labelElement.setAttribute("for", `wrc-input-${this.value}`);
     this.inputElement.addEventListener("keydown", this.handleInputEnterKey);
     this.inputElement.addEventListener("change", this.handleInputChange);
