@@ -46,3 +46,9 @@
   color: var(--color-white);
   cursor: default;
 }
+
+@media screen and (min-width: 412px) {
+  .web-rating-checkbox__label {
+    font-size: 1.0625rem;
+  }
+}
