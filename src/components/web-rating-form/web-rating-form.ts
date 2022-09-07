@@ -32,6 +32,7 @@ class WebRatingForm extends HTMLElement {
   connectedCallback() {
     if (this.#initialMount) {
       this.classList.add("web-rating-form");
+      this.buttonElement.setAttribute("id", "wrf-submit-button");
       this.append(this.templateFragment);
       this.#initialMount = false;
     }

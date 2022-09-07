@@ -34,6 +34,7 @@ class WebRatingResult extends HTMLElement {
   connectedCallback() {
     if (this.#initialMount) {
       this.classList.add("web-rating-result");
+      this.buttonElement.setAttribute("id", "wrr-reset-button");
       this.append(this.templateFragment);
       this.#initialMount = false;
     }

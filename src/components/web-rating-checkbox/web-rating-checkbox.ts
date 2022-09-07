@@ -34,12 +34,12 @@ class WebRatingCheckbox extends HTMLElement {
   connectedCallback() {
     if (this.#initialMount) {
       this.classList.add("web-rating-checkbox");
+      this.inputElement.setAttribute("id", `wrc-input-${this.value}`);
+      this.labelElement.setAttribute("id", `wrc-label-${this.value}`);
+      this.labelElement.setAttribute("for", `wrc-input-${this.value}`);
       this.append(this.templateFragment);
       this.#initialMount = false;
     }
-    this.inputElement.setAttribute("id", `wrc-input-${this.value}`);
-    this.labelElement.setAttribute("id", `wrc-label-${this.value}`);
-    this.labelElement.setAttribute("for", `wrc-input-${this.value}`);
     this.inputElement.addEventListener("keydown", this.handleInputEnterKey);
     this.inputElement.addEventListener("change", this.handleInputChange);
   }
