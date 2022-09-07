@@ -5,11 +5,21 @@
 }
 
 .web-rating-checkbox__input {
-  display: none;
+  margin: 0;
+  position: absolute;
+  z-index: 100;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 9999px;
+  appearance: none;
+  cursor: pointer;
 }
 
 .web-rating-checkbox__label {
   position: absolute;
+  z-index: 10;
   top: 0;
   left: 0;
   display: flex;
@@ -22,7 +32,6 @@
   color: var(--color-medium-grey);
   font-size: 0.875rem;
   font-weight: 700;
-  cursor: pointer;
   transition-property: background-color, color;
   transition-duration: 150ms;
 }
