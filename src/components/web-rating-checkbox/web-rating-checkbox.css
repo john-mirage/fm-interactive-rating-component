@@ -22,9 +22,18 @@
   color: var(--color-medium-grey);
   font-size: 0.875rem;
   font-weight: 700;
+  cursor: pointer;
+  transition-property: background-color, color;
+  transition-duration: 150ms;
+}
+
+.web-rating-checkbox__input:not(:checked):hover ~ .web-rating-checkbox__label {
+  background-color: var(--color-orange);
+  color: var(--color-white);
 }
 
 .web-rating-checkbox__input:checked ~ .web-rating-checkbox__label {
-  background-color: var(--color-orange);
+  background-color: var(--color-light-grey);
   color: var(--color-white);
+  cursor: default;
 }
