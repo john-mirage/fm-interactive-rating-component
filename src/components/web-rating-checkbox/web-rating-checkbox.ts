@@ -14,6 +14,7 @@ class WebRatingCheckbox extends HTMLElement {
     this.templateFragment = <DocumentFragment>template.content.cloneNode(true);
     this.inputElement = <HTMLInputElement>this.templateFragment.querySelector("#wrc-input");
     this.labelElement = <HTMLLabelElement>this.templateFragment.querySelector("#wrc-label");
+    this.handleInputEnterKey = this.handleInputEnterKey.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
   }
 
@@ -38,10 +39,12 @@ class WebRatingCheckbox extends HTMLElement {
     }
     this.inputElement.setAttribute("id", `wrc-input-${this.value}`);
     this.labelElement.setAttribute("for", `wrc-input-${this.value}`);
+    this.inputElement.addEventListener("keydown", this.handleInputEnterKey);
     this.inputElement.addEventListener("change", this.handleInputChange);
   }
 
   disconnectedCallback() {
+    this.inputElement.removeEventListener("keydown", this.handleInputEnterKey);
     this.inputElement.removeEventListener("change", this.handleInputChange);
   }
 
@@ -52,6 +55,12 @@ class WebRatingCheckbox extends HTMLElement {
         break;
       default:
         throw new Error("The modified attribute is not observed");
+    }
+  }
+
+  handleInputEnterKey(event: KeyboardEvent) {
+    if (event.key === "Enter" && !this.inputElement.checked) {
+      this.inputElement.checked = true;
     }
   }
 
