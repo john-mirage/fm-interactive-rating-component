@@ -46,16 +46,16 @@
   letter-spacing: 0.0625rem;
   border-radius: 9999px;
   border: none;
-  background-color: var(--color-button);
-  color: var(--color-orange);
+  background-color: var(--color-orange);
+  color: var(--color-white);
   transition-property: background-color, color;
   transition-duration: 150ms;
   cursor: pointer;
 }
 
 .web-rating-result__button:hover {
-  background-color: var(--color-orange);
-  color: var(--color-white);
+  background-color: var(--color-white);
+  color: var(--color-orange);
 }
 
 @media screen and (min-width: 412px) {
