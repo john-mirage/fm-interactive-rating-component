@@ -1,36 +1,12 @@
 import WebRatingForm from "@components/web-rating-form/web-rating-form";
 import WebRatingResult from "@components/web-rating-result/web-rating-result";
-
-const fadeAndScaleAnimation: Keyframe[] = [
-  { opacity: 0, transform: "scale(0.9)", offset: 0 },
-  { opacity: 1, transform: "scale(1)", offset: 1 }
-];
-
-const fadeAndScaleAnimationTimeline: KeyframeAnimationOptions = {
-  duration: 300,
-  fill: "backwards",
-  easing: "ease-in-out",
-};
-
-const fadeOutAndTranslateAnimation: Keyframe[] = [
-  { opacity: 1, transform: "translateY(0)", offset: 0 },
-  { opacity: 0, transform: "translateY(-2rem)", offset: 1 }
-];
-
-const fadeOutAndTranslateAnimationTimeline: KeyframeAnimationOptions = {
-  duration: 300,
-  fill: "backwards",
-  easing: "ease-in-out",
-};
+import { gsap } from "gsap";
 
 class WebRating extends HTMLElement {
   #initialMount = true;
   #initialAnimation = true;
   webRatingForm: WebRatingForm;
   webRatingResult: WebRatingResult;
-  appOpeningKeyframes: KeyframeEffect;
-  appUpdateKeyframes: KeyframeEffect;
-  appAnimation: Animation;
 
   static get observedAttributes() {
     return ["current-view"];
@@ -40,9 +16,6 @@ class WebRating extends HTMLElement {
     super();
     this.webRatingForm = <WebRatingForm>document.createElement("web-rating-form");
     this.webRatingResult = <WebRatingResult>document.createElement("web-rating-result");
-    this.appOpeningKeyframes = new KeyframeEffect(this, fadeAndScaleAnimation, fadeAndScaleAnimationTimeline);
-    this.appUpdateKeyframes = new KeyframeEffect(this, fadeOutAndTranslateAnimation, fadeOutAndTranslateAnimationTimeline);
-    this.appAnimation = new Animation(this.appOpeningKeyframes, document.timeline);
     this.handleRatingFormView = this.handleRatingFormView.bind(this);
     this.handleRatingResultView = this.handleRatingResultView.bind(this);
   }
@@ -73,9 +46,6 @@ class WebRating extends HTMLElement {
   }
 
   disconnectedCallback() {
-    if (this.appAnimation.effect !== this.appOpeningKeyframes) {
-      this.appAnimation.effect = this.appOpeningKeyframes;
-    }
     this.removeEventListener("display-rating-form-view", this.handleRatingFormView);
     this.removeEventListener("display-rating-result-view", this.handleRatingResultView);
   }
@@ -85,7 +55,6 @@ class WebRating extends HTMLElement {
       case "current-view":
         const hasCurrentView = newValue !== null;
         if (hasCurrentView) {
-          this.appAnimation.playbackRate = 1;
           if (this.#initialAnimation) {
             this.displayInitialView(newValue);
           } else {
@@ -101,21 +70,34 @@ class WebRating extends HTMLElement {
   }
 
   displayInitialView(initialView: string) {
-    this.displayView(initialView);
-    this.appAnimation.play();
-    this.appAnimation.addEventListener("finish", () => {
-      this.appAnimation.effect = this.appUpdateKeyframes;
-      this.#initialAnimation = false;
+    gsap.from(this, {
+      scale: 0.8,
+      opacity: 0,
+      ease: "back",
+      duration: 0.6,
+      onComplete: () => {
+        this.#initialAnimation = false;
+      }
     });
+    this.displayView(initialView);
   }
 
   displayUpdatedView(updatedView: string) {
-    this.appAnimation.play();
-    this.appAnimation.addEventListener("finish", () => {
-      this.appAnimation.playbackRate = -1;
-      this.appAnimation.play();
-      this.displayView(updatedView);
-    }, { once: true });
+    gsap.to(this, {
+      y: -24,
+      opacity: 0,
+      ease: "back",
+      duration: 0.3,
+      onComplete: () => {
+        gsap.to(this, {
+          y: 0,
+          opacity: 1,
+          ease: "back",
+          duration: 0.3,
+        });
+        this.displayView(updatedView);
+      }
+    });
   }
   
   displayView(view: string) {
@@ -132,21 +114,13 @@ class WebRating extends HTMLElement {
   }
 
   handleRatingFormView() {
-    if (this.appAnimation.playState !== "running") {
-      this.currentView = "form";
-    } else {
-      console.log("already animating");
-    }
+    this.currentView = "form";
   }
 
   handleRatingResultView(customEvent: Event) {
-    if (this.appAnimation.playState !== "running") {
-      const { value } = (<CustomEvent>customEvent).detail;
-      this.webRatingResult.value = value;
-      this.currentView = "result";
-    } else {
-      console.log("already animating");
-    }
+    const { value } = (<CustomEvent>customEvent).detail;
+    this.webRatingResult.value = value;
+    this.currentView = "result";
   }
 }
 
