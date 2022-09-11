@@ -56,9 +56,10 @@ class WebRating extends HTMLElement {
         const hasCurrentView = newValue !== null;
         if (hasCurrentView) {
           if (this.#initialAnimation) {
-            this.displayInitialView(newValue);
+            this.displayView(newValue);
+            this.#initialAnimation = false;
           } else {
-            this.displayUpdatedView(newValue);
+            this.displayViewWithAnimation(newValue);
           }
         } else {
           this.currentView = "form";
@@ -69,20 +70,7 @@ class WebRating extends HTMLElement {
     }
   }
 
-  displayInitialView(initialView: string) {
-    gsap.from(this, {
-      scale: 0.8,
-      opacity: 0,
-      ease: "back",
-      duration: 0.6,
-      onComplete: () => {
-        this.#initialAnimation = false;
-      }
-    });
-    this.displayView(initialView);
-  }
-
-  displayUpdatedView(updatedView: string) {
+  displayViewWithAnimation(updatedView: string) {
     gsap.to(this, {
       y: -24,
       opacity: 0,
